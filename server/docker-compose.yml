@@ -1,0 +1,13 @@
+version: '3'
+services:
+
+  mariadb:
+    image: mariadb:10.6.5
+    container_name: mariadb-container
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "vendas"
+    volumes:
+      - ./.volumes/database:/var/lib/mysql

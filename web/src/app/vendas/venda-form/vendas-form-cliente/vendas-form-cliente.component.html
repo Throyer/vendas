@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col mb-3">
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="cliente"><strong>Cliente</strong></label>
+              <ng-select
+                [items]="clientes"
+                [(ngModel)]="cliente"
+                (change)="clienteChange.emit(cliente)"
+                bindLabel="nome"
+                [loading]="isLoading"
+                name="produto"
+                [typeahead]="typeahead">
+                  <ng-template ng-option-tmp let-item="item">
+                    <strong>Código: </strong>{{ item.codigo }} <br>
+                    <strong>Nome: </strong>{{ item.nome || item.razaoSocial }} <span [ngClass]="{'badge-success': item.cpf, 'badge-danger': item.cnpj}" class="badge ">{{ item.cpf ? 'PF' : 'PJ' }}</span><br>
+                    <strong>Documento:</strong>{{ item.cpf || item.cnpj  }}
+                  </ng-template>
+              </ng-select>
+              <div class="invalid-feedback">
+                Por favor informe o cliente.
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr [hidden]="!(cliente)">
+        <div class="row">
+          <div class="col-4">
+            <div class="form-group">
+              <label>Código</label>
+              <input disabled [value]="cliente?.codigo" type="text"class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label>Nome</label>
+              <input disabled [value]="cliente?.nome || cliente?.razaoSocial" type="text"class="form-control form-control-sm">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <label>Documento</label>
+              <input disabled [value]="cliente?.cpf || cliente?.cnpj" type="text"class="form-control form-control-sm">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
