@@ -12,12 +12,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.github.throyer.vendas.api.domain.models.cliente.Cliente;
+import com.github.throyer.vendas.api.domain.models.cliente.ClientePF;
+import com.github.throyer.vendas.api.domain.models.cliente.ClientePJ;
 import com.github.throyer.vendas.api.domain.models.operational.Funcionario;
 import com.github.throyer.vendas.api.domain.models.shared.Auditavel;
 import com.github.throyer.vendas.api.domain.repositories.ProdutoRepository;
@@ -36,7 +38,13 @@ public class Venda extends Auditavel implements Serializable {
 
     @NotNull
     @ManyToOne
-    private Cliente cliente;
+    @JoinColumn(name = "cliente_pj_id")
+    private ClientePJ clientePj;
+    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "cliente_pf_id")
+    private ClientePF clientePf;
 
     @NotNull
     @ManyToOne
@@ -56,7 +64,8 @@ public class Venda extends Auditavel implements Serializable {
     public Venda() { }
 
     public Venda(Venda venda, ProdutoRepository repository) {
-        this.cliente = venda.getCliente();
+        this.clientePf = venda.getClientePf();
+        this.clientePj = venda.getClientePj();
         this.vendedor = venda.getVendedor();
         this.data = LocalDateTime.now();
         this.setItens(venda.getItens(), repository);
@@ -70,20 +79,28 @@ public class Venda extends Auditavel implements Serializable {
         return new Item(item, produto, venda);
     }
 
+    public ClientePJ getClientePj() {
+        return clientePj;
+    }
+
+    public void setClientePj(ClientePJ clientePj) {
+        this.clientePj = clientePj;
+    }
+
+    public ClientePF getClientePf() {
+        return clientePf;
+    }
+
+    public void setClientePf(ClientePF clientePf) {
+        this.clientePf = clientePf;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public Funcionario getVendedor() {

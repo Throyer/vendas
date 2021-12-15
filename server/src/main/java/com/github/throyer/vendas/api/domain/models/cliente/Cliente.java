@@ -34,9 +34,8 @@ public abstract class Cliente extends Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private Integer codigo;
+    private String codigo;
 
     public Long getId() {
         return id;
@@ -46,7 +45,7 @@ public abstract class Cliente extends Pessoa implements Serializable {
         this.id = id;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 

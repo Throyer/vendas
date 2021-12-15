@@ -1,13 +1,14 @@
 package com.github.throyer.vendas.api.domain.models.venda;
 
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -20,7 +21,7 @@ public class Item extends Auditavel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     private Integer quantidade;
@@ -29,7 +30,7 @@ public class Item extends Auditavel implements Serializable {
     private Produto produto;
     
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = ALL)
     private Venda venda;
 
     private BigDecimal total;

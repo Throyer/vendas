@@ -24,7 +24,7 @@ public class VendasController {
     @Autowired
     private VendaService service;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Page<Venda>> index(Pageable pageable) {
         return ok(service.findAll(pageable));
     }

@@ -8,7 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.github.throyer.vendas.api.domain.models.security.Usuario;
 
 @Entity
 public class Funcionario implements Serializable {
@@ -19,12 +22,12 @@ public class Funcionario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private Integer codigo;
+    private String codigo;
 
-    @NotEmpty
-    private String nome;
+    @ManyToOne
+    @JsonIgnore
+    private Usuario usuario;
 
     public Long getId() {
         return id;
@@ -34,15 +37,16 @@ public class Funcionario implements Serializable {
         this.id = id;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
-    public String getNome() {
-        return nome;
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
@@ -66,6 +70,6 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return getNome();
+        return usuario.getNome();
     }
 }

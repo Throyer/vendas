@@ -23,9 +23,8 @@ public class Produto extends Auditavel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true)
-    private Integer codigo;
+    private String codigo;
 
     @NotEmpty
     private String nome;
@@ -42,7 +41,7 @@ public class Produto extends Auditavel implements Serializable {
         this.id = id;
     }
 
-    public Integer getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
     
