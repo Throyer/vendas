@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  database:
+    image: mariadb:10.6.5
+    restart: unless-stopped
+    container_name: vendas-database
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "vendas"
+    volumes:
+      - ./.volumes/database:/var/lib/mysql
+    networks:
+      - vendas
+    tty: true
+
+  api:
+    build: 
+      context: ../api
+      dockerfile: ../api/docker/Dockerfile.prod
+    image: throyer/vendas-api
+    restart: unless-stopped
+    container_name: vendas-api
+    links:
+      - database
+    ports:
+      - 8080:80
+    depends_on:
+      - database
+    environment:
+      DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - vendas
+    tty: true
+    entrypoint: "dockerize -wait tcp://database:3306 -timeout 20s java -jar api.jar"
+
+networks:
+  vendas:
+    driver: bridge

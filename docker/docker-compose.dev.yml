@@ -1,0 +1,43 @@
+version: '3'
+services:
+
+  database:
+    image: mariadb:10.6.5
+    restart: unless-stopped
+    container_name: vendas-database
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "vendas"
+    volumes:
+      - ./.volumes/database:/var/lib/mysql
+    networks:
+      - vendas
+    tty: true
+
+  api:
+    image: maven:3.8.5-openjdk-17
+    restart: unless-stopped
+    container_name: vendas-api-development
+    links:
+      - database
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+    environment:
+      DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ../api:/app
+      - ./.volumes/maven:/root/.m2
+    working_dir: /app
+    networks:
+      - vendas
+    tty: true
+    entrypoint: "mvn spring-boot:run"
+
+networks:
+  vendas:
+    driver: bridge
