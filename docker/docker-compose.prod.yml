@@ -38,6 +38,19 @@ services:
     tty: true
     entrypoint: "dockerize -wait tcp://database:3306 -timeout 20s java -jar api.jar"
 
+  web:
+    build: 
+      context: ../web
+      dockerfile: ../web/docker/Dockerfile.prod
+    image: throyer/vendas-web
+    restart: unless-stopped
+    container_name: vendas-web
+    ports:
+      - "8082:8080"
+    networks:
+      - vendas
+    tty: true
+
 networks:
   vendas:
     driver: bridge

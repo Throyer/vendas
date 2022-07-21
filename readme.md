@@ -32,9 +32,14 @@ Criando arquivos de migração de banco de dados
 
 ## Docker
 > 🚨 certifique que o arquivo de `environment` foi criado
+> e instale os pacotes do npm (somente para o development do web)
 >
 > ```bash
 >   cp docker/.env.example docker/.env
+> ```
+>
+> ```bash
+>   docker run --rm -w /usr/app -v $(pwd)/web:/usr/app node:16.14.2 npm install --legacy-peer-deps
 > ```
 
 - docker compose development

@@ -4,7 +4,7 @@ services:
   database:
     image: mariadb:10.6.5
     restart: unless-stopped
-    container_name: vendas-database
+    container_name: vendas-database-development
     ports:
       - 3306:3306
     environment:
@@ -37,6 +37,20 @@ services:
       - vendas
     tty: true
     entrypoint: "mvn spring-boot:run"
+
+  web:
+    image: node:16.14.2
+    restart: unless-stopped
+    container_name: vendas-web-development
+    ports:
+      - "4200:4200"
+    volumes:
+      - ../web:/app
+    working_dir: /app
+    networks:
+      - vendas
+    tty: true
+    entrypoint: "npm start"
 
 networks:
   vendas:

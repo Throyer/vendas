@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "M2SystemWeb": {
+    "vendas": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/M2SystemWeb",
+            "outputPath": "dist/vendas",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "M2SystemWeb:build"
+            "browserTarget": "vendas:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "M2SystemWeb:build:production"
+              "browserTarget": "vendas:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "M2SystemWeb:build"
+            "browserTarget": "vendas:build"
           }
         },
         "test": {
@@ -120,16 +120,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "M2SystemWeb:serve"
+            "devServerTarget": "vendas:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "M2SystemWeb:serve:production"
+              "devServerTarget": "vendas:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "M2SystemWeb"
+  "defaultProject": "vendas"
 }
