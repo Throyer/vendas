@@ -15,7 +15,7 @@
 - Maven: `^3.8.4`
 
 ## Database Migrations
-> 🚨 cerifique de que tem o maven no seu ambiente
+> 🚨 cerifique-se de que tem o maven no seu ambiente
 > e que você esta no diretório __./api__
 
 Criando arquivos de migração de banco de dados
@@ -31,7 +31,7 @@ Criando arquivos de migração de banco de dados
   ```
 
 ## Docker
-> 🚨 certifique que o arquivo de `environment` foi criado
+> 🚨 certifique-se que o arquivo de `environment` foi criado
 > e instale os pacotes do npm (somente para o development do web)
 >
 > ```bash
