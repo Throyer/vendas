@@ -5,10 +5,10 @@ import static org.springframework.http.ResponseEntity.ok;
 import javax.validation.Valid;
 
 import com.github.throyer.vendas.api.domain.models.venda.Venda;
+import com.github.throyer.vendas.api.domain.pagination.Page;
 import com.github.throyer.vendas.api.services.VendaService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +26,11 @@ public class VendasController {
 
     @GetMapping
     public ResponseEntity<Page<Venda>> index(Pageable pageable) {
-        return ok(service.findAll(pageable));
+        return ok(Page.of(service.findAll(pageable)));
     }
 
     @PostMapping
-    public ResponseEntity<Object> store(@RequestBody @Valid Venda venda) {
+    public ResponseEntity<Venda> store(@RequestBody @Valid Venda venda) {
         return ok(service.persistir(venda));
     }
 }

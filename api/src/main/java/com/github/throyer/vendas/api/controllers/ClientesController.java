@@ -7,10 +7,10 @@ import static com.github.throyer.vendas.api.utils.PageUtils.of;
 import java.util.Optional;
 
 import com.github.throyer.vendas.api.domain.models.cliente.Cliente;
+import com.github.throyer.vendas.api.domain.pagination.Page;
 import com.github.throyer.vendas.api.domain.repositories.ClienteRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,8 +36,8 @@ public class ClientesController {
         @RequestParam Optional<Integer> size
     ) {
         if (anyPresent(documento, rg, nome, codigo)) {            
-            return repository.findAll(where(documento, rg, nome, codigo), of(page, size));
+            return Page.of(repository.findAll(where(documento, rg, nome, codigo), of(page, size)));
         }
-        return repository.findAll(of(page, size));
+        return Page.of(repository.findAll(of(page, size)));
     }
 }
