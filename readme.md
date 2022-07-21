@@ -39,7 +39,7 @@ Criando arquivos de migração de banco de dados
 > ```
 >
 > ```bash
->   docker run --rm -w /usr/app -v $(pwd)/web:/usr/app node:16.14.2 npm install --legacy-peer-deps
+>   docker run -it --rm -w /usr/app -v $(pwd)/web:/usr/app node:16.14.2 npm install --legacy-peer-deps
 > ```
 
 - docker compose development

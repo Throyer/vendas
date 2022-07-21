@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install -g @angular/cli
-RUN npm install --legacy-peer-deps
+RUN npm set cache ./.npm
+RUN --mount=type=cache,target=/usr/src/app/.npm npm install --legacy-peer-deps
+RUN --mount=type=cache,target=/usr/src/app/.npm npm install -g @angular/cli
+
 RUN ng build
 
 FROM nginx:1.23.1-alpine
