@@ -19,11 +19,11 @@
 > e instale os pacotes do npm (somente para o development do web)
 >
 > ```bash
->   cp docker/.env.example docker/.env
+>  cp docker/.env.example docker/.env
 > ```
 >
 > ```bash
->   docker run -it --rm -w /usr/app -v $(pwd)/web:/usr/app node:16.14.2 npm install --legacy-peer-deps
+>  docker run -it --rm -w /usr/app -v $(pwd)/web:/usr/app node:16.14.2 npm install --legacy-peer-deps
 > ```
 
 - docker compose development
