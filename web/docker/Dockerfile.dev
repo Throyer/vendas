@@ -1,0 +1,10 @@
+FROM node:16.14.2
+
+WORKDIR /app
+
+RUN npm set cache /.npm
+
+COPY . .
+
+RUN npm install --legacy-peer-deps
+RUN npm install -g @angular/cli

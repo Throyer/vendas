@@ -40,6 +40,10 @@ services:
 
   web:
     image: node:16.14.2
+    # build: 
+    #   context: ../web
+    #   dockerfile: ../web/docker/Dockerfile.dev
+    # image: throyer/vendas-web:development
     restart: unless-stopped
     container_name: vendas-web-development
     ports:

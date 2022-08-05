@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/api/v1/produtos")
 public class ProdutosController {
 
     @Autowired
