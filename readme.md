@@ -10,7 +10,7 @@
 
 ## Requisitos
 
-- Postgres: `^13`
+- MariaDB: `^10.6.5`
 - Java: `^17`
 - Maven: `^3.8.4`
 
