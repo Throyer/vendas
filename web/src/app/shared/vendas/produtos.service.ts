@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Produto } from '../models/Produto';
 import { Page } from '../Page';
 import { environment } from 'src/environments/environment';
+import {Venda} from '../models/Venda';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ProdutosService {
 
   public findProdutos(pesquisa: any): Observable<Page<Produto>> {
 
-    const END_POINT = `${environment.API_URL}/produtos`
+    const END_POINT = `${environment.API_URL}/produtos`;
 
     const observable = this
       .http
@@ -23,4 +24,8 @@ export class ProdutosService {
     return observable;
   }
 
+  public createOrder(venda: Venda): Observable<any> {
+    const URI = `${environment.API_URL}/vendas`;
+    return this.http.post(URI, venda);
+  }
 }

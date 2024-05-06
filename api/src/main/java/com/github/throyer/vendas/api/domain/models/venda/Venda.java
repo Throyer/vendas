@@ -3,6 +3,7 @@ package com.github.throyer.vendas.api.domain.models.venda;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,8 +25,11 @@ import com.github.throyer.vendas.api.domain.models.operational.Funcionario;
 import com.github.throyer.vendas.api.domain.models.shared.Auditavel;
 import com.github.throyer.vendas.api.domain.repositories.ProdutoRepository;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
+
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME;
 
 @Entity
 public class Venda extends Auditavel implements Serializable {
@@ -36,17 +40,14 @@ public class Venda extends Auditavel implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "cliente_pj_id")
     private ClientePJ clientePj;
-    
-    @NotNull
+
     @ManyToOne
     @JoinColumn(name = "cliente_pf_id")
     private ClientePF clientePf;
 
-    @NotNull
     @ManyToOne
     private Funcionario vendedor;
 
@@ -125,8 +126,8 @@ public class Venda extends Auditavel implements Serializable {
                 .collect(Collectors.toList());
     }
 
-    public LocalDateTime getData() {
-        return data;
+    public String getData() {
+        return data.format(DateTimeFormatter.ISO_DATE_TIME);
     }
 
     public BigDecimal getTotal() {

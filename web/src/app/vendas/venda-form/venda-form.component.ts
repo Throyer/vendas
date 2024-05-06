@@ -68,6 +68,12 @@ export class VendaFormComponent implements OnInit {
     }
   }
 
+  async createOrder(): Promise<void> {
+    await this.service.createOrder(this.venda)
+      .toPromise();
+    this.venda = new Venda();
+  }
+
   removerItem(item: Item): void {
     const itens = this.venda
       .itens

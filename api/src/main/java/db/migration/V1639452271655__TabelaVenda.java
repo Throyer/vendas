@@ -20,9 +20,9 @@ public class V1639452271655__TabelaVenda extends BaseJavaMigration {
                     .column("id", BIGINT.identity(true))
                     .column("data", TIMESTAMP.nullable(false))
                     .column("total", DECIMAL(10, 2).nullable(false))
-                    .column("cliente_pf_id", BIGINT.nullable(false))
-                    .column("cliente_pj_id", BIGINT.nullable(false))
-                    .column("vendedor_id", BIGINT.nullable(false))
+                    .column("cliente_pf_id", BIGINT.nullable(true))
+                    .column("cliente_pj_id", BIGINT.nullable(true))
+                    .column("vendedor_id", BIGINT.nullable(true))
                 .constraints(
                     primaryKey("id"),
                     constraint("venda_cliente_pf_fk").foreignKey("cliente_pf_id").references("cliente_pf", "id"),
